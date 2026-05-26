@@ -1,147 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>CI/CD Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Frontend Deployment Dashboard</title>
 
-<style>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            text-align: center;
+            padding: 40px;
+        }
 
-body{
-    background:#0d1117;
-    color:white;
-    font-family:Arial;
-    text-align:center;
-}
+        h1{
+            color: #333;
+        }
 
-h1{
-    color:#58a6ff;
-}
+        .container{
+            background: white;
+            width: 60%;
+            margin: auto;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
 
-.container{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    flex-wrap:wrap;
-    margin-top:30px;
-}
+        .step{
+            background: #e9ecef;
+            padding: 15px;
+            margin: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+        }
 
-.box{
-    background:#161b22;
-    padding:20px;
-    width:180px;
-    border-radius:10px;
-    border:2px solid #30363d;
-}
+        .active{
+            background: #90ee90;
+            font-weight: bold;
+        }
 
-.active{
-    border-color:#3fb950;
-    box-shadow:0 0 10px #3fb950;
-}
+        button{
+            padding: 12px 25px;
+            border: none;
+            background: #007bff;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
 
-button{
-    margin-top:30px;
-    padding:12px 25px;
-    border:none;
-    background:#238636;
-    color:white;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-#logs{
-    width:80%;
-    margin:auto;
-    margin-top:30px;
-    background:black;
-    padding:20px;
-    height:200px;
-    overflow:auto;
-    border-radius:10px;
-}
-
-</style>
+        #logs{
+            margin-top: 20px;
+            background: black;
+            color: lime;
+            padding: 15px;
+            border-radius: 8px;
+            height: 180px;
+            overflow-y: auto;
+            text-align: left;
+        }
+    </style>
 </head>
 
 <body>
 
-<h1>GitHub CI/CD Workflow</h1>
+<h1>Deploying JavaScript Frontend Project</h1>
 
 <div class="container">
 
-    <div class="box" id="repo">
-        <h3>Repository</h3>
-        <p>Create Repo</p>
+    <div class="step" id="build">
+        Step 1: Build Frontend Project
     </div>
 
-    <div class="box" id="branch">
-        <h3>Branch</h3>
-        <p>feature-ui</p>
+    <div class="step" id="env">
+        Step 2: Load Environment Variables
     </div>
 
-    <div class="box" id="pr">
-        <h3>Pull Request</h3>
-        <p>Merge Code</p>
+    <div class="step" id="deploy">
+        Step 3: Deploy to Netlify/Vercel/Firebase
     </div>
 
-    <div class="box" id="ci">
-        <h3>GitHub Actions</h3>
-        <p>Run CI</p>
+    <button onclick="startDeployment()">
+        Start Deployment
+    </button>
+
+    <div id="logs">
+        <h3>Deployment Logs</h3>
     </div>
 
-    <div class="box" id="deploy">
-        <h3>Deploy</h3>
-        <p>Production</p>
-    </div>
-
-</div>
-
-<button onclick="start()">Start Workflow</button>
-
-<div id="logs">
-    <h3>Live Logs</h3>
 </div>
 
 <script>
 
 const logs = document.getElementById("logs");
 
-function log(msg){
+// Simulated Environment Variable
+const API_URL =
+"https://api.example.com";
 
-    logs.innerHTML += "<p>" + msg + "</p>";
+function addLog(message){
+    logs.innerHTML +=
+    "<p>" + message + "</p>";
 }
 
-function active(id){
-
-    document.getElementById(id)
+function activate(id){
+    document
+    .getElementById(id)
     .classList.add("active");
 }
 
-function start(){
+function startDeployment(){
 
-    setTimeout(()=>{
-        active("repo");
-        log("Repository Created");
+    setTimeout(() => {
+        activate("build");
+        addLog(
+        "Frontend project build successful");
     },1000);
 
-    setTimeout(()=>{
-        active("branch");
-        log("Branch Created");
+    setTimeout(() => {
+        activate("env");
+        addLog(
+        "Environment Variable Loaded:");
+        addLog(
+        "API_URL = " + API_URL);
     },3000);
 
-    setTimeout(()=>{
-        active("pr");
-        log("Pull Request Merged");
+    setTimeout(() => {
+        activate("deploy");
+        addLog(
+        "Project deployed successfully to Vercel / Netlify / Firebase");
     },5000);
-
-    setTimeout(()=>{
-        active("ci");
-        log("GitHub Actions Running");
-    },7000);
-
-    setTimeout(()=>{
-        active("deploy");
-        log("Deployment Successful");
-    },9000);
-
 }
 
 </script>
