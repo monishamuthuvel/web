@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CI/CD Dashboard</title>
+
+<style>
+
+body{
+    background:#0d1117;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+h1{
+    color:#58a6ff;
+}
+
+.container{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-top:30px;
+}
+
+.box{
+    background:#161b22;
+    padding:20px;
+    width:180px;
+    border-radius:10px;
+    border:2px solid #30363d;
+}
+
+.active{
+    border-color:#3fb950;
+    box-shadow:0 0 10px #3fb950;
+}
+
+button{
+    margin-top:30px;
+    padding:12px 25px;
+    border:none;
+    background:#238636;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+#logs{
+    width:80%;
+    margin:auto;
+    margin-top:30px;
+    background:black;
+    padding:20px;
+    height:200px;
+    overflow:auto;
+    border-radius:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>GitHub CI/CD Workflow</h1>
+
+<div class="container">
+
+    <div class="box" id="repo">
+        <h3>Repository</h3>
+        <p>Create Repo</p>
+    </div>
+
+    <div class="box" id="branch">
+        <h3>Branch</h3>
+        <p>feature-ui</p>
+    </div>
+
+    <div class="box" id="pr">
+        <h3>Pull Request</h3>
+        <p>Merge Code</p>
+    </div>
+
+    <div class="box" id="ci">
+        <h3>GitHub Actions</h3>
+        <p>Run CI</p>
+    </div>
+
+    <div class="box" id="deploy">
+        <h3>Deploy</h3>
+        <p>Production</p>
+    </div>
+
+</div>
+
+<button onclick="start()">Start Workflow</button>
+
+<div id="logs">
+    <h3>Live Logs</h3>
+</div>
+
+<script>
+
+const logs = document.getElementById("logs");
+
+function log(msg){
+
+    logs.innerHTML += "<p>" + msg + "</p>";
+}
+
+function active(id){
+
+    document.getElementById(id)
+    .classList.add("active");
+}
+
+function start(){
+
+    setTimeout(()=>{
+        active("repo");
+        log("Repository Created");
+    },1000);
+
+    setTimeout(()=>{
+        active("branch");
+        log("Branch Created");
+    },3000);
+
+    setTimeout(()=>{
+        active("pr");
+        log("Pull Request Merged");
+    },5000);
+
+    setTimeout(()=>{
+        active("ci");
+        log("GitHub Actions Running");
+    },7000);
+
+    setTimeout(()=>{
+        active("deploy");
+        log("Deployment Successful");
+    },9000);
+
+}
+
+</script>
+
+</body>
+</html>
